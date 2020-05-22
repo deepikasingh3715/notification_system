@@ -1,0 +1,35 @@
+{
+  "name": "notificationsystem",
+  "version": "1.0.0",
+  "description": "broadcasting users for an event ",
+  "main": "index.js",
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.14.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepikasingh3715/notification_system.git"
+  },
+  "author": "deepika singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deepikasingh3715/notification_system/issues"
+  },
+  "homepage": "https://github.com/deepikasingh3715/notification_system#readme",
+  "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "parser": "^0.1.4",
+    "sequelize": "^5.21.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
