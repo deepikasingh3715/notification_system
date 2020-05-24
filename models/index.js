@@ -24,42 +24,85 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 const notifications = db.sequelize.define("notifications", {
-    //const notification = sequelize.define("notification", {
 
      notificationId:{
-     type: Sequelize.STRING,
-     allowNull: false,
-     //autoIncrement: true,
-     primaryKey: true
+        type: Sequelize.SMALLINT,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
     },
-      userId: {
-        type: Sequelize.STRING
+      employeeId: {
+        type: Sequelize.SMALLINT,
+        allowNull: false
       },
       notificationType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       modeOfCommunication:{
-          type:Sequelize.STRING
+          type:Sequelize.STRING,
+          allowNull: false,
       },
 
       isPublished: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        
       }
     });
 
 
+    const employeedata = db.sequelize.define("employeedata", {
+       employeeId:  {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true
+      },
+        employeeName: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        password: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        lastLoginAt: {
+          type: Sequelize.DATE(),
+          allowNull: false
+        }
+             
+      }); 
+      
+      
+      const communicationmodes = db.sequelize.define("communicationmodes", {
+        Id:  {
+           type: Sequelize.INTEGER,
+           allowNull: false,
+           autoIncrement: true,
+           primaryKey: true
+       },
+         notificationId: {
+           type: Sequelize.INTEGER,
+           allowNull: false,
+         },
+         mode: {
+           type: Sequelize.TINYINT,
+           allowNull: false,
+         },
+         notifiers: {
+           type: Sequelize.STRING(),
+           allowNull: false
+         }
+              
+       }); 
 
 
 
-
-
-
-//db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
-
-
-module.exports = { db,notifications };
+module.exports = db ;
 
 //module.exports = db;

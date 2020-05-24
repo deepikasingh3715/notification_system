@@ -1,45 +1,42 @@
 //const express = require('express');
 // const Router = require.Router();
-
-
 const eventnotification = require('../notification/eventnotification');
-
-//const mysqlConnection  = require("../connection"); 
+const db = require("../models/index");
 const dbConfig = require("../dbconfig/db.config.js");
 
 var bodyParser = require('body-parser')
-
-
+var dbModels = db.sequelize.models;
 var jsonParser = bodyParser.json()
 
-module.exports = app =>{
+module.exports = (app) =>{
    
-  app.get('/',(req,res) =>{ 
-        //res.send('{"testing"}');     
-        mysqlConnection.query("SELECT * from userdata",(err,rows,fields)=>{
-          if(!err){
-           console.log("---query success rows:-----",rows);
-           res.send(rows); 
-                }
-        else
-        {
-            console.log("-------query failure------");
-        }
-        });
+  app.get('/',(req,res) =>{      
+       res.send("test");
+  });
         
-        
-        app.post('/api/createnotification',jsonParser,async (req,res) =>{    
-          // let responses = await eventnotification.textQuery(req.body.text,req.body.userID,req.body.parameters);                         
-          let responses = await eventnotification.createNotification(req.body.text,req.body.userID,req.body.parameters); 
-         // res.send(responses[0].queryResult.fulfillmentMessages );
-           console.log(responses);
+      
+  app.post('/api/createnotification',jsonParser,async (req,res) =>{  
+      var querydata={};
+      querydata.notificationId=req.body.notificationId,
+      querydata.employeeId =req.body.employeeId,
+      querydata.notificationType = req.body.notificationType,
+      querydata.description = req.body.description,
+      querydata.modeOfCommunication = req.body.modeOfCommunication,
+      querydata.isPublished = req.body.isPublished
+
+ 
+      let responses = await eventnotification.createNotificationQuery(querydata);  
+      res.send(responses);      
                });    
       
-      });
+    
 
 
-  app.get('/events',(req,res)=>{ 
-   res.send(['celebration','aid','policy_declaration','nagarro_news']);
+  app.get('/api/getnotification',jsonParser,(req,res)=>{ 
+
   });      
+ 
   
+
+
 }

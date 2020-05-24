@@ -4,7 +4,7 @@ var mysqlConnection = mysql.createConnection({
     host: "localhost",
     user:"root",
     password:"root",
-    database:"NotificationSystem",
+    database:"notificationsystem",
     multipleStatements : true,
     //debug: true,
     dialect: "mysql",

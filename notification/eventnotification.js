@@ -3,91 +3,79 @@
 //const config = require('../config/keys');
 //const structjson  = require('./structjson');
 //const mongoose = require('mongoose');
+const db = require("../models/index");
+var dbModels = db.sequelize.models;
+
+const dbHelperNotification = require("../dbHelper/dbHelperNotification");
 
 const sequelize = require('sequelize');
 
-module.exports = {
-   createNotification: async function(text,parameters={}){
- 
-   let self = module.exports;
-    const request = {
-        session: sessionPath,
-        queryInput: {
-          text: {
-            text:text,
-            //languageCode: 'config.dialogFlowSessionLanguageCode',
-            languageCode:'en-US',
-          },
-        },
-        queryParams:{
-         payload:{
-              data:parameters
-          }
-         }
-      };
+module.exports = { 
+  
+  createNotificationQuery: async function(queryData){
+  console.log("/n/n/n------queryData------",queryData);
+  //createNotificationQuery: async function(notificationId,employeeId,notificationType,description,modeOfCommunication,isPublished){
+   
+  
+  //createNotificationQuery: async function(text,parameters={}){
+   
+  //  let self = module.exports;
+  //   const request = {
+  //       session: sessionPath,
+  //       queryInput: {
+  //         text: {
+  //           text:text,
+  //           //languageCode: 'config.dialogFlowSessionLanguageCode',
+  //           languageCode:'en-US',
+  //         },
+  //       },
+  //       queryParams:{
+  //        payload:{
+  //             data:parameters
+  //         }
+  //        }
+  //     };
+
+  // var newEntry = {};
+  // newEntry.notificationId = notificationId;
+  // newEntry.employeeId = employeeId;
+  // newEntry.notificationType = notificationType;
+  // newEntry.description = description ;
+  // newEntry.modeOfCommunication = modeOfCommunication ;
+  // newEntry.isPublished = isPublished;
+  
+
+
+
 
 
  console.log("-------------HAPPY PATH------------");
-
-     //let createdEvent = await 
-    //let responses = await sessionClient.detectIntent(request);
+ //let responses = await dbModels.notifications.create(newEntry);
+   //let createNotification = await dbHelperNotification.createNotification(newEntry);
+   
+   let createNotification = await dbHelperNotification.createNotification(queryData);   
+   
+   //let responses = await sessionClient.detectIntent(request);
     //responses = await self.handleAction(responses);
 
     //return responses;
    },
 
-   eventQuery: async function(event,parameters){
-  // eventQuery: async function(event){
-    let self = module.exports;
-    const request = {
-        session: sessionPath,
-        queryInput: {
-          event: {
-            name:event,
-            parameters:structjson.jsonToStructProto(parameters),//js to protostruct
-            languageCode: 'en-US',
-          },
-        }
-        
-      };
 
-    let responses = await sessionClient.detectIntent(request);
-    responses = await self.handleAction(responses);
-    return responses;
+  //  handleAction:function(responses){
+  //   let self = module.exports;
+  //   let queryResult = responses[0].queryResult;
 
-   },
+  //   switch (queryResult.action) {
+  //       case 'recommendcourses-yes':
+  //           if (queryResult.allRequiredParamsPresent) {
+  //             self.saveRegistration(queryResult.parameters.fields);
+  //           }
+  //           break;
+  //   }
 
-   handleAction:function(responses){
-    let self = module.exports;
-    let queryResult = responses[0].queryResult;
-
-    switch (queryResult.action) {
-        case 'recommendcourses-yes':
-            if (queryResult.allRequiredParamsPresent) {
-              self.saveRegistration(queryResult.parameters.fields);
-            }
-            break;
-    }
-
-    return responses;     
-   },
-
-
-//  saveRegistration:function(fields){
-//   const registration = new Registration({
-//     name: fields.name.stringValue,
-//     address: fields.address.stringValue,
-//     phone: fields.phone.stringValue,
-//     email: fields.email.stringValue,
-//     dateSent: Date.now()
-// });
-// try{
-//     let reg = await registration.save();
-//     console.log(reg);
-// } catch (err){
-//     console.log(err);
-// }
-//}
+  //   return responses;     
+  //  },
 
 
 }
