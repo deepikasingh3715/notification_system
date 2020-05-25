@@ -18,11 +18,11 @@ var mysqlConnection = mysql.createConnection({
 
 mysqlConnection.connect((err)=>{
     if(!err){
-        console.log("connection established from db.config.js");
+        console.log("connection established");
     }
     else
     {
-        console.log("failure");
+        console.log("connection failed");
     }
 
 })

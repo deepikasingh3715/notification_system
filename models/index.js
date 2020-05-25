@@ -2,7 +2,6 @@ const dbConfig = require("../dbconfig/db.config.js");
 
 const Sequelize = require("sequelize");
 
-//const dbconfig = dbConfig.config;
 
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user,dbConfig.password, {
   host: dbConfig.host,
@@ -47,6 +46,10 @@ const notifications = db.sequelize.define("notifications", {
           type:Sequelize.STRING,
           allowNull: false,
       },
+      notifiers:{
+        type:Sequelize.STRING,
+        allowNull: false,
+    },
 
       isPublished: {
         type: Sequelize.STRING,
@@ -67,6 +70,10 @@ const notifications = db.sequelize.define("notifications", {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        emailId:  {
+          type: Sequelize.STRING,
+          allowNull: false,
+      },
         password: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -105,4 +112,3 @@ const notifications = db.sequelize.define("notifications", {
 
 module.exports = db ;
 
-//module.exports = db;
