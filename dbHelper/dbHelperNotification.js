@@ -7,7 +7,7 @@ const Op = db.Sequelize.Op;
 module.exports={
 
     createNotification: async function(Notificationdata){
-    console.log(" \n\n\n  Notificationdata(dbHepler): ",Notificationdata);
+    console.log(" \n\n\n  Notificationdata(dbHelper): ",Notificationdata);
         try {
             let creatednotificationdata = await dbModels.notifications.create(Notificationdata);
             return creatednotificationdata;
@@ -22,16 +22,26 @@ module.exports={
 
     verifyLogin: async function(loginCredential){
         var employeeName = loginCredential.employeeName;
-        var emailId =  loginCredential.emailId;
+        //var emailId =  loginCredential.emailId;
         var password = loginCredential.password;
+
+console.log("\n\n\n   loginCredential(dbHelper)  :  ",loginCredential);
+
 
             try {
                 let isVerifiedByUserName = await dbModels.employeedata.findOne({
-                    where: 
-                    {
-                         employeeName: employeeName
-                    }      
+                   // attributes: ['employeeId','employeeName','emailId'],
+                    where: {
+                        [Op.and]: [
+                          { employeeName: employeeName },
+                          { password: password }
+                        ]
+                      }
+                    
+
                });
+
+               console.log("\n\n\n  isVerifiedByUserName(dbHelper)  :  ",isVerifiedByUserName);
 
                 let data;
                 if (loginCredential.employeeName == (isVerifiedByUserName.dataValues.employeeName) && loginCredential.password ==(isVerifiedByUserName.dataValues.password))
@@ -43,7 +53,7 @@ module.exports={
                      data="password is incorrect\n\n";                  
                  }
                 
-            
+            console.log(" \n\n\n  data(dbHelper)   : ",data);
             return data;
             } catch (err) {
                 console.log("\n\ninvalid username \n\n");
@@ -72,6 +82,9 @@ module.exports={
 
 
         checkLastLogin: async function(lastLoginAtData){
+ 
+            console.log("\n\n\n   lastLoginAtData(dbHelper)  : ",lastLoginAtData);
+
             let employeeName = lastLoginAtData.employeeName;
              try{
             let lastLoginAtResult = await dbModels.employeedata.findOne({
@@ -90,7 +103,8 @@ module.exports={
 
 
 
-        checkNotification: async function(lastLoginData){     
+        checkNotification: async function(lastLoginData){    
+            console.log("\n\n\n lastLoginData(dbHelper) for checking if any notification :",lastLoginData); 
           
             try {
                 let results = await dbModels.notifications.findAndCountAll({

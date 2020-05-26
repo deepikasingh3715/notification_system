@@ -19,6 +19,7 @@ module.exports = {
    
    verifyLoginQuery: async function(logindata){  
 
+    console.log("\n\n\n  logindata(eventnotification)   : ",logindata)
      var verifiedLoginData = await dbHelperNotification.verifyLogin(logindata);
      console.log("\n\n\n  verifiedLoginData(eventnotification): ",verifiedLoginData);
      let updatedLastLogin = await dbHelperNotification.updateLastLogin(verifiedLoginData.dataValues.employeeName);

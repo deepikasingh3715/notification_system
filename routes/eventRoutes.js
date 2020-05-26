@@ -39,21 +39,29 @@ module.exports = (app) =>{
   
     app.post('/api/login',jsonParser,async(req,res)=>{ 
 
-    var logindata={};
-    logindata.employeeName=req.body.employeeName,
-    logindata.emailId=req.body.emailId,
-    logindata.password =req.body.password
+      console.log("\n\n\n  req.body.userLoginData(eventRoutes)  :  ",req.body.userLoginData);
+
+
+      var logindata = req.body.userLoginData;
+    //var logindata={};
+    // logindata.employeeName=req.body.employeeName,
+    // logindata.emailId=req.body.emailId,
+    // logindata.password =req.body.password
 
     let verifiedLoginResponse = await eventnotification.verifyLoginQuery(logindata);
+    console.log("\n\n\n   verifiedLoginResponse(eventRoutes) : ",verifiedLoginResponse);
     res.send(verifiedLoginResponse);  
 
   });   
   
   app.post('/api/getnotification',jsonParser,async(req,res)=>{ 
 
-    var dataQuery={};
-    dataQuery.employeeName=req.body.employeeName,
-    dataQuery.emailId=req.body.emailId
+    console.log("\n\n\n  dataQuery(eventRoutes)  :",req.body);
+
+     let dataQuery = req.body.userData;
+    // var dataQuery={};
+    // dataQuery.employeeName=req.body.employeeName,
+    // dataQuery.emailId=req.body.emailId
    
     let checkedLastLogin = await eventnotification.checkLastLogin(dataQuery);
     console.log("\n\n\n  checkedLastLogin(eventRoutes) :",checkedLastLogin);
