@@ -4,8 +4,7 @@ const mysql  = require('mysql');
 
 
 const db = require("./models/index");
-//const Op = db.Sequelize.Op;
-//const Op = db.Op;
+
 const cors = require('cors');
 
 
@@ -31,9 +30,7 @@ app.use(function(req, res, next) {
   });
 
 
-//const db = require("./models");
-//db.sync({alter:true});
-//db.sequelize.sync({alter:true});
+
 
 
 const PORT = process.env.PORT || 5000;

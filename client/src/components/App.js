@@ -22,7 +22,7 @@ const App = () => {
                   <div>
                    <div className="container">
 
-                    {/* <Switch> */}
+                   
                        <Header/> 
 
                       
@@ -33,9 +33,8 @@ const App = () => {
                        <Route exact path="/logout" component={Login}/>
                        <Route exact path="/" component={Login}/>
                        <Redirect exact from="/" to="login" />
-                       {/* <Redirect exact from="/" to="logOut" /> */}
-                  
-                  {/* </Switch> */}  
+                      
+                
                    </div> 
                    </div>
              </BrowserRouter>
