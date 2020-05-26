@@ -7,12 +7,13 @@ const Op = db.Sequelize.Op;
 module.exports={
 
     createNotification: async function(Notificationdata){
-
+    console.log(" \n\n\n  Notificationdata(dbHepler): ",Notificationdata);
         try {
             let creatednotificationdata = await dbModels.notifications.create(Notificationdata);
             return creatednotificationdata;
         } catch (err) {
-            throw new Error(err);
+            //throw new Error(err);
+            console.log("ERROR IN CREATING ");
         }
     
     },

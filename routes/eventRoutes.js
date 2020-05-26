@@ -16,18 +16,23 @@ module.exports = (app) =>{
         
       
   app.post('/api/createnotification',jsonParser,async (req,res) =>{  
-      var querydata={};
-      querydata.notificationId=req.body.notificationId,
-      querydata.employeeId =req.body.employeeId,
-      querydata.notificationType = req.body.notificationType,
-      querydata.description = req.body.description,
-      querydata.modeOfCommunication = req.body.modeOfCommunication,
-      querydata.notifiers = req.body.notifiers,
-      querydata.isPublished = req.body.isPublished
+  
+    console.log("\n\n\n  req.body(routes) :  ",req.body);
 
- 
+      let querydata= req.body.createnotification;
+      //  let querydata={};
+      // querydata.notificationId=req.body.notificationId,
+      // querydata.employeeId =req.body.employeeId,
+      // querydata.notificationType = req.body.notificationType,
+      // querydata.description = req.body.description,
+      // querydata.modeOfCommunication = req.body.modeOfCommunication,
+      // querydata.notifiers = req.body.notifiers,
+      // querydata.isPublished = req.body.isPublished
+
+      console.log("\n\n\n  querydata(routes) :  ",querydata);
+
       let responses = await eventnotification.createNotificationQuery(querydata); 
-      console.log("\n\n\n\n\n responses from craetenotification api :",responses); 
+      console.log("\n\n\n\n\n responses(eventRouets) :  ",responses); 
       res.send(responses);      
                });    
       
@@ -40,7 +45,6 @@ module.exports = (app) =>{
     logindata.password =req.body.password
 
     let verifiedLoginResponse = await eventnotification.verifyLoginQuery(logindata);
-    
     res.send(verifiedLoginResponse);  
 
   });   
@@ -50,13 +54,11 @@ module.exports = (app) =>{
     var dataQuery={};
     dataQuery.employeeName=req.body.employeeName,
     dataQuery.emailId=req.body.emailId
-
    
     let checkedLastLogin = await eventnotification.checkLastLogin(dataQuery);
-    console.log("\n\n\n^^^^^^^^^^ checkLastLogin from event routes ^^^^^^^^^^^^",checkedLastLogin);
+    console.log("\n\n\n  checkedLastLogin(eventRoutes) :",checkedLastLogin);
     let getNotification = await eventnotification.anyNotification(checkedLastLogin);
-   
-    console.log("\n\n\n\n\n  getNotification from event routes checkedLastLogin",getNotification);
+    console.log("\n\n\n\n\ getNotification(eventRouets) :  ",getNotification);
 
     res.send(getNotification);  
 
